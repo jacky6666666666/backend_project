@@ -17,7 +17,7 @@ public class TransactionResponseData {
     private LocalDateTime transactionDate;
     private TransactionStatus transactionStatus;
     private BigDecimal amount;
-    List<TransactionResponseData> transactionProductResponseDataList = new ArrayList<>();
+    List<TransactionProductResponseData> transactionProductResponseDataList = new ArrayList<>();
 
     public TransactionResponseData(TransactionEntity transactionEntity) {
         this.tid = transactionEntity.getTid();
@@ -69,7 +69,7 @@ public class TransactionResponseData {
         this.amount = amount;
     }
 
-    public List<TransactionResponseData> getTransactionProductResponseDataList() {
+    public List<TransactionProductResponseData> getTransactionProductResponseDataList() {
         return transactionProductResponseDataList;
     }
 
