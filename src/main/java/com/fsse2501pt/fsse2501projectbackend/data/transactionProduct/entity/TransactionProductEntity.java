@@ -55,6 +55,9 @@ public class TransactionProductEntity {
     public TransactionProductEntity() {
     }
 
+    public TransactionProductEntity(TransactionEntity transactionEntity) {
+    }
+
     public Integer getTpid() {
         return tpid;
     }

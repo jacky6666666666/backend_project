@@ -14,6 +14,10 @@ public interface CartRepository extends CrudRepository<CartEntity, Integer> {
 
     List<CartEntity> findByUser(UserEntity user);
 
+    //List<CartEntity> findByProduct(ProductEntity product);
+
+
+
 
 }
 

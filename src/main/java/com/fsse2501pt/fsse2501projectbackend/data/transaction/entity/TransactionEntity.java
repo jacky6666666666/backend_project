@@ -45,6 +45,9 @@ public class TransactionEntity {
         this.total = BigDecimal.ZERO;
     }
 
+    public TransactionEntity(UserEntity userEntity) {
+    }
+
     public Integer getTid() {
         return tid;
     }

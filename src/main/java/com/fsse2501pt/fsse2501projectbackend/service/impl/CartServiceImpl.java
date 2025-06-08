@@ -104,6 +104,13 @@ public class CartServiceImpl implements CartService {
         }
     }
 
+    @Override
+    public List<CartEntity> getCartItemListByUserEntity(UserEntity userEntity){
+        return cartRepository.findByUser(userEntity);
+    }
+
+
+
 
 
 
