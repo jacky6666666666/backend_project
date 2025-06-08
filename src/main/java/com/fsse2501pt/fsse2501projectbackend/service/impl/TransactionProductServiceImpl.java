@@ -8,12 +8,15 @@ import com.fsse2501pt.fsse2501projectbackend.service.CartService;
 import com.fsse2501pt.fsse2501projectbackend.service.TransactionProductService;
 import org.antlr.v4.runtime.misc.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class TransactionProductServiceImpl implements TransactionProductService {
-    public CartService cartService;
+    private CartService cartService;
     private TransactionProductRepository transactionProductRepository;
 
     @Autowired
@@ -31,7 +34,7 @@ public class TransactionProductServiceImpl implements TransactionProductService 
         for (CartEntity cartEntity : cartEntityList) {
             TransactionProductEntity transactionProductEntity = new TransactionProductEntity(transactionEntity);
             transactionProductEntity = transactionProductRepository.save(transactionProductEntity);
-
+            transactionProductEntities.add(transactionProductEntity);
         }
 
         return transactionProductEntities;
