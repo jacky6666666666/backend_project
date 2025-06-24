@@ -9,14 +9,14 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class  UserServiceImpl implements UserService {
     private final UserReposity userReposity;
 
     public UserServiceImpl(UserReposity userReposity) {
         this.userReposity = userReposity;
     }
 
-    public UserEntity getEntityByEmail(FirebaseUserData firebaseUserData) {
+    public UserEntity getEntityByFirebaseUserData(FirebaseUserData firebaseUserData) {
 
         Optional<UserEntity> optionalUserEntity = userReposity.findByEmail(firebaseUserData.getEmail());
 

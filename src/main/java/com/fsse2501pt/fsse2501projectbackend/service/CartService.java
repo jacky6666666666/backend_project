@@ -4,6 +4,7 @@ import com.fsse2501pt.fsse2501projectbackend.data.cart.domainObject.response.Car
 import com.fsse2501pt.fsse2501projectbackend.data.cart.entity.CartEntity;
 import com.fsse2501pt.fsse2501projectbackend.data.user.domainObject.request.FirebaseUserData;
 import com.fsse2501pt.fsse2501projectbackend.data.user.entity.UserEntity;
+import jakarta.transaction.Transactional;
 
 import java.util.List;
 
@@ -20,4 +21,7 @@ public interface CartService {
 
     List<CartEntity> getCartItemListByUserEntity(UserEntity userEntity);
 
+    // this process could need roll back, so need to add @Transactional
+    @Transactional
+    void emptyCart(UserEntity userEntity);
 }

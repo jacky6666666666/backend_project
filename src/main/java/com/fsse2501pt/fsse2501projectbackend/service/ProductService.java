@@ -9,4 +9,6 @@ public interface ProductService {
     public List<ProductResponseData> getAllProduct();
     public ProductResponseData getProductByPid(Integer pid);
     public ProductEntity getEntityByPid(Integer pid);
+
+    boolean deductStock(Integer pid, Integer quantity);
 }

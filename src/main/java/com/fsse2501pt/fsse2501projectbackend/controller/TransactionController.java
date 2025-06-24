@@ -6,10 +6,7 @@ import com.fsse2501pt.fsse2501projectbackend.service.TransactionService;
 import com.fsse2501pt.fsse2501projectbackend.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("transactions")
@@ -28,6 +25,33 @@ public class TransactionController {
         );
 
     }
+
+    @GetMapping("/{tid}")
+    public TransactionResponseDto getTransaction(JwtAuthenticationToken jwtAuthenticationToken,
+                                                 @PathVariable Integer tid) {
+        return new TransactionResponseDto(
+                transactionService.getTransactionByTid(JwtUtil.toFirebaseUserData(jwtAuthenticationToken), tid)
+        );
+
+
+    }
+
+    @PatchMapping("/{tid}/pay")
+    public void payTransaction(JwtAuthenticationToken jwtAuthenticationToken,
+                               @PathVariable Integer tid){
+        transactionService.processTransaction(JwtUtil.toFirebaseUserData(jwtAuthenticationToken), tid);
+
+    }
+
+    @PatchMapping("/{tid}/success")
+    public TransactionResponseDto finishTransaction(JwtAuthenticationToken jwtAuthenticationToken,
+                                                    @PathVariable Integer tid){
+        return new TransactionResponseDto(
+                transactionService.finishTransaction(
+                        JwtUtil.toFirebaseUserData(jwtAuthenticationToken), tid));
+
+    }
+
 
 
 

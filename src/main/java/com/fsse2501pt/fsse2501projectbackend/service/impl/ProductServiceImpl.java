@@ -50,5 +50,21 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findById(pid).orElseThrow(() -> new ProductNotFoundException(pid));
     }
 
+    @Override
+    public boolean deductStock(Integer pid, Integer quantity){
+        // if have stuff, then get, if no stuff, return error
+        ProductEntity productEntity = productRepository.findById(pid).orElseThrow(() -> new RuntimeException());
+
+        if(productEntity.getStock() < quantity){
+            throw new RuntimeException();
+        }
+
+        productEntity.setStock(productEntity.getStock() - quantity);
+        productRepository.save(productEntity);
+        return true;
+    }
+
+
+
 
 }

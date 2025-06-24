@@ -10,6 +10,7 @@ import com.fsse2501pt.fsse2501projectbackend.repository.CartRepository;
 import com.fsse2501pt.fsse2501projectbackend.service.CartService;
 import com.fsse2501pt.fsse2501projectbackend.service.ProductService;
 import com.fsse2501pt.fsse2501projectbackend.service.UserService;
+import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -35,7 +36,7 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public void putCartItem(FirebaseUserData firebaseUserData, Integer pid, Integer quantity) {
-        UserEntity userEntity = userService.getEntityByEmail(firebaseUserData);
+        UserEntity userEntity = userService.getEntityByFirebaseUserData(firebaseUserData);
         ProductEntity productEntity = productService.getEntityByPid(pid);
         Optional<CartEntity> existingCartItem = cartRepository.findByUserAndProduct(userEntity, productEntity);
         CartEntity cartEntity;
@@ -58,7 +59,7 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public List<CartResponseData> getCartItemList(FirebaseUserData firebaseUserData){
-        UserEntity userEntity = userService.getEntityByEmail(firebaseUserData);
+        UserEntity userEntity = userService.getEntityByFirebaseUserData(firebaseUserData);
         List<CartResponseData> cartResponseDataList = new ArrayList<>();
 
         for (CartEntity cartEntity : cartRepository.findByUser(userEntity)) {
@@ -70,7 +71,7 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public CartResponseData updateCartItem(FirebaseUserData firebaseUserData, Integer pid, Integer quantity){
-        UserEntity userEntity = userService.getEntityByEmail(firebaseUserData);
+        UserEntity userEntity = userService.getEntityByFirebaseUserData(firebaseUserData);
         ProductEntity productEntity = productService.getEntityByPid(pid);
         //List<CartResponseData> cartResponseDataList = new ArrayList<>();
 
@@ -88,7 +89,7 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public void deleteCartItem(FirebaseUserData firebaseUserData, Integer pid){
-        UserEntity userEntity = userService.getEntityByEmail(firebaseUserData);
+        UserEntity userEntity = userService.getEntityByFirebaseUserData(firebaseUserData);
         ProductEntity productEntity = productService.getEntityByPid(pid);
         Optional<CartEntity> existingItem = cartRepository.findByUserAndProduct(userEntity, productEntity);
 
@@ -107,6 +108,13 @@ public class CartServiceImpl implements CartService {
     @Override
     public List<CartEntity> getCartItemListByUserEntity(UserEntity userEntity){
         return cartRepository.findByUser(userEntity);
+    }
+
+    // this process could need roll back, so need to add @Transactional
+    @Transactional
+    @Override
+    public void emptyCart(UserEntity userEntity){
+        cartRepository.deleteAllByUser(userEntity);
     }
 
 

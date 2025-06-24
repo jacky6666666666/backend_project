@@ -7,6 +7,9 @@ public interface TransactionService {
     TransactionResponseData prepareTransaction(FirebaseUserData firebaseUserData);
 
 
+    TransactionResponseData getTransactionByTid(FirebaseUserData firebaseUserData, Integer tid);
 
+    void processTransaction(FirebaseUserData firebaseUserData, Integer tid);
 
+    TransactionResponseData finishTransaction(FirebaseUserData firebaseUserData, Integer tid);
 }

@@ -23,6 +23,10 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+
+	implementation 'mysql:mysql-connector-java:8.0.31'
+	implementation 'org.hibernate:hibernate-core:6.6.13.Final'  // Ensure this matches the Hibernate version used by Spring Boot
+
 	testImplementation 'org.springframework.security:spring-security-test'
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'

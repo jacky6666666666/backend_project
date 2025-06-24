@@ -14,6 +14,8 @@ public interface CartRepository extends CrudRepository<CartEntity, Integer> {
 
     List<CartEntity> findByUser(UserEntity user);
 
+    void deleteAllByUser(UserEntity userEntity);
+
     //List<CartEntity> findByProduct(ProductEntity product);
 
 
