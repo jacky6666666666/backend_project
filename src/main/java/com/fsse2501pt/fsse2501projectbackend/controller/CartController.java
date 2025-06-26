@@ -5,6 +5,7 @@ import com.fsse2501pt.fsse2501projectbackend.data.user.domainObject.request.Fire
 import com.fsse2501pt.fsse2501projectbackend.service.CartService;
 import com.fsse2501pt.fsse2501projectbackend.util.JwtUtil;
 import jakarta.validation.constraints.Positive;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,11 +18,13 @@ public class CartController {
     private final CartService cartService;
 
     // DI
+    @Autowired
     public CartController(CartService cartService) {
+
         this.cartService = cartService;
     }
 
-    @PostMapping("/{pid}/{quantity}")
+    @PutMapping("{pid}/{quantity}")
     public void putCartItem(JwtAuthenticationToken token, @PathVariable int pid, @Positive @PathVariable int quantity) {
 
         FirebaseUserData firebaseUserData = JwtUtil.toFirebaseUserData(token);

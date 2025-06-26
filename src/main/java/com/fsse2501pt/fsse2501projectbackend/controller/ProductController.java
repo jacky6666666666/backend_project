@@ -31,7 +31,7 @@ public class ProductController {
     }
 
     @GetMapping("/{pid}")  // to add further link
-    public ProductResponseDto getById(@PathVariable Integer pid) {
+    public ProductResponseDto getByPid(@PathVariable Integer pid) {
         return new ProductResponseDto(
                 productService.getProductByPid(pid)
         );

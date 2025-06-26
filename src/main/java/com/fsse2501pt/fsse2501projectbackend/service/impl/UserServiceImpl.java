@@ -13,9 +13,11 @@ public class  UserServiceImpl implements UserService {
     private final UserReposity userReposity;
 
     public UserServiceImpl(UserReposity userReposity) {
+
         this.userReposity = userReposity;
     }
 
+    @Override
     public UserEntity getEntityByFirebaseUserData(FirebaseUserData firebaseUserData) {
 
         Optional<UserEntity> optionalUserEntity = userReposity.findByEmail(firebaseUserData.getEmail());
