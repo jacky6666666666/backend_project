@@ -75,7 +75,7 @@ public class TransactionResponseData {
 
     public void setTransactionProductResponseDataList(TransactionEntity transactionEntity) {
         for (TransactionProductEntity transactionProductEntity : transactionEntity.getTransactionProductEntityList()) {
-            new TransactionProductResponseData(transactionProductEntity);
+            transactionProductResponseDataList.add(new TransactionProductResponseData(transactionProductEntity)); // didnt add to list....
         }
     }
 }

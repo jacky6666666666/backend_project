@@ -42,6 +42,7 @@ public class TransactionProductEntity {
     private Integer quantity;
 
     public TransactionProductEntity(TransactionEntity transactionEntity, CartEntity cartEntity) {
+//        use this constructor!
         this.transaction = transactionEntity;
         this.pid = cartEntity.getProduct().getPid();
         this.name = cartEntity.getProduct().getName();
@@ -53,9 +54,6 @@ public class TransactionProductEntity {
     }
 
     public TransactionProductEntity() {
-    }
-
-    public TransactionProductEntity(TransactionEntity transactionEntity) {
     }
 
     public Integer getTpid() {

@@ -2,6 +2,7 @@ package com.fsse2501pt.fsse2501projectbackend.controller;
 
 
 import com.fsse2501pt.fsse2501projectbackend.data.transaction.dto.TransactionResponseDto;
+import com.fsse2501pt.fsse2501projectbackend.data.transaction.response.TransactionResponseData;
 import com.fsse2501pt.fsse2501projectbackend.service.TransactionService;
 import com.fsse2501pt.fsse2501projectbackend.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,7 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("transactions")
+@RequestMapping("/transactions")
 public class TransactionController {
     private final TransactionService transactionService;
 
@@ -20,9 +21,12 @@ public class TransactionController {
 
     @PostMapping("")
     public TransactionResponseDto createTransaction(JwtAuthenticationToken jwtAuthenticationToken) {
-        return new TransactionResponseDto(
-                transactionService.prepareTransaction(JwtUtil.toFirebaseUserData(jwtAuthenticationToken))
-        );
+        TransactionResponseData transactionResponseData = transactionService.prepareTransaction(JwtUtil.toFirebaseUserData(jwtAuthenticationToken));
+        TransactionResponseDto transactionResponseDto = new TransactionResponseDto(transactionResponseData);
+        return transactionResponseDto;
+//        return new TransactionResponseDto(
+//                transactionService.prepareTransaction(JwtUtil.toFirebaseUserData(jwtAuthenticationToken))  // max fixed
+//        );
 
     }
 
@@ -36,7 +40,7 @@ public class TransactionController {
 
     }
 
-    @PatchMapping("/{tid}/pay")
+    @PatchMapping("/{tid}/payment")
     public void payTransaction(JwtAuthenticationToken jwtAuthenticationToken,
                                @PathVariable Integer tid){
         transactionService.processTransaction(JwtUtil.toFirebaseUserData(jwtAuthenticationToken), tid);

@@ -21,7 +21,11 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth ->
-                        auth.anyRequest().authenticated())
+                        auth.requestMatchers(HttpMethod.GET, "/public/product").
+                                permitAll().
+                                anyRequest().
+                                authenticated())
+//                need to add requestMatcher here to allow /public not using bearerToken
                 .csrf(csrf -> csrf.disable());
 
         http

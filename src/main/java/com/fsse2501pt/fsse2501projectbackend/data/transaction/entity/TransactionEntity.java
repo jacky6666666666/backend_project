@@ -40,12 +40,17 @@ public class TransactionEntity {
 
     public TransactionEntity(UserEntity userEntity, LocalDateTime dataTime, TransactionStatus status, BigDecimal total) {
         this.userEntity = userEntity;
-        this.dataTime = dataTime.now();
+        this.dataTime = LocalDateTime.now();
         this.status = TransactionStatus.PREPARE;
         this.total = BigDecimal.ZERO;
     }
 
     public TransactionEntity(UserEntity userEntity) {
+        // empty?????? you are doing nothing  max fixed
+        this.userEntity = userEntity;
+        this.dataTime = LocalDateTime.now();
+        this.status = TransactionStatus.PREPARE;
+        this.total = BigDecimal.ZERO;
     }
 
     public Integer getTid() {

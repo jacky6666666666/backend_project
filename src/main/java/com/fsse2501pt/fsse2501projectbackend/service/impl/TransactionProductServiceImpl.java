@@ -39,7 +39,7 @@ public class TransactionProductServiceImpl implements TransactionProductService 
         List<TransactionProductEntity> transactionProductEntities = new ArrayList<>();
 
         for (CartEntity cartEntity : cartEntityList) {
-            TransactionProductEntity transactionProductEntity = new TransactionProductEntity(transactionEntity);
+            TransactionProductEntity transactionProductEntity = new TransactionProductEntity(transactionEntity, cartEntity); // 1 para
             transactionProductEntity = transactionProductRepository.save(transactionProductEntity);
             transactionProductEntities.add(transactionProductEntity);
         }

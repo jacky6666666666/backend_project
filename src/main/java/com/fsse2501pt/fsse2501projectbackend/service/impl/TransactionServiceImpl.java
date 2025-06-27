@@ -38,7 +38,7 @@ public class TransactionServiceImpl implements TransactionService {
     public TransactionResponseData prepareTransaction(FirebaseUserData firebaseUserData){
         UserEntity userEntity = userService.getEntityByFirebaseUserData(firebaseUserData);
 
-        TransactionEntity transactionEntity = new TransactionEntity(userEntity);
+        TransactionEntity transactionEntity = new TransactionEntity(userEntity); // constructor with 1 para
         transactionEntity = transactionRepository.save(transactionEntity);
 
         List<TransactionProductEntity> transactionProductEntityList = transactionProductService.createTransactionProductList(transactionEntity);
@@ -49,6 +49,7 @@ public class TransactionServiceImpl implements TransactionService {
 
         );
         transactionRepository.save(transactionEntity);
+        System.out.println(transactionEntity.getDataTime());
 
         TransactionResponseData transactionResponseData = new TransactionResponseData(transactionEntity);
         return transactionResponseData;
