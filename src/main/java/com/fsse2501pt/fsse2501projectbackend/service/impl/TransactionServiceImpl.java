@@ -49,7 +49,7 @@ public class TransactionServiceImpl implements TransactionService {
 
         );
         transactionRepository.save(transactionEntity);
-        System.out.println(transactionEntity.getDataTime());
+       // System.out.println(transactionEntity.getDataTime());
 
         TransactionResponseData transactionResponseData = new TransactionResponseData(transactionEntity);
         return transactionResponseData;

@@ -50,7 +50,7 @@ public class TransactionProductEntity {
         this.imageUrl = cartEntity.getProduct().getImageUrl();
         this.price = cartEntity.getProduct().getPrice();
         this.stock = cartEntity.getProduct().getStock();
-        this.quantity = cartEntity.getProduct().getStock();
+        this.quantity = cartEntity.getQuantity();
     }
 
     public TransactionProductEntity() {
