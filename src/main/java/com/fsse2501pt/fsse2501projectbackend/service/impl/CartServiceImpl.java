@@ -6,6 +6,7 @@ import com.fsse2501pt.fsse2501projectbackend.data.product.entity.ProductEntity;
 import com.fsse2501pt.fsse2501projectbackend.data.user.entity.UserEntity;
 import com.fsse2501pt.fsse2501projectbackend.data.user.domainObject.request.FirebaseUserData;
 import com.fsse2501pt.fsse2501projectbackend.exception.product.ProductNotFoundException;
+import com.fsse2501pt.fsse2501projectbackend.exception.product.ProductOutOfStock;
 import com.fsse2501pt.fsse2501projectbackend.repository.CartRepository;
 import com.fsse2501pt.fsse2501projectbackend.service.CartService;
 import com.fsse2501pt.fsse2501projectbackend.service.ProductService;
@@ -40,6 +41,10 @@ public class CartServiceImpl implements CartService {
         ProductEntity productEntity = productService.getEntityByPid(pid);
         Optional<CartEntity> existingCartItem = cartRepository.findByUserAndProduct(userEntity, productEntity);
         CartEntity cartEntity;
+
+        if(productEntity.getStock() == 0) {
+            throw new ProductOutOfStock(pid);
+        }
 
         // check if the product already exist in the cart, if yes, then add up the number
         if(existingCartItem.isPresent()) {
