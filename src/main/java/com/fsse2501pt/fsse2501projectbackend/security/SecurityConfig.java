@@ -21,13 +21,14 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth ->
-                        auth.requestMatchers(HttpMethod.GET, "/public/product").
+                        auth.requestMatchers(HttpMethod.GET, "/public/product/**").
+                                // /public/product/** mean the path before ** do not need to be authenticated
                                 permitAll().
                                 anyRequest().
                                 authenticated())
 //                need to add requestMatcher here to allow /public not using bearerToken
                 .csrf(csrf -> csrf.disable());
-
+//              .cors(Customizer.withDefaults());
         http
                 .oauth2ResourceServer(oauth2ResourceServer -> oauth2ResourceServer.jwt(
                         jwt -> jwt.decoder(JwtDecoders.fromIssuerLocation(issuer))
