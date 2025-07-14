@@ -30,7 +30,7 @@ public class CartResponseDto {
         this.imageUrl = cartResponseData.getProductEntity().getImageUrl();
         this.price = cartResponseData.getProductEntity().getPrice();
         this.quantity = cartResponseData.getQuantity();
-        this.stock = cartResponseData.getQuantity();
+        this.stock = cartResponseData.getProductEntity().getStock();
 
     }
 

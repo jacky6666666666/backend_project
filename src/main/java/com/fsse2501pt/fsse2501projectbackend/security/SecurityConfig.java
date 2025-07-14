@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -27,8 +28,8 @@ public class SecurityConfig {
                                 anyRequest().
                                 authenticated())
 //                need to add requestMatcher here to allow /public not using bearerToken
-                .csrf(csrf -> csrf.disable());
-//              .cors(Customizer.withDefaults());
+                .csrf(csrf -> csrf.disable())
+              .cors(Customizer.withDefaults()); // to allow pre-flight
         http
                 .oauth2ResourceServer(oauth2ResourceServer -> oauth2ResourceServer.jwt(
                         jwt -> jwt.decoder(JwtDecoders.fromIssuerLocation(issuer))
